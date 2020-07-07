@@ -55,6 +55,14 @@ public class Server {
         }
     }
 
+    void personalMsg(String msg, String firstName, String secondName) {
+        for (ClientHandler client : clients) {
+            if (client.getNick().equals(firstName) || client.getNick().equals(secondName)) {
+                client.sendMsg(msg);
+            }
+        }
+    }
+
     public void subscribe(ClientHandler clientHandler){
         clients.add(clientHandler);
     }
