@@ -58,7 +58,18 @@ public class ClientHandler {
                             break;
                         }
 
-                        server.broadcastMsg(str);
+                        if (str.startsWith("/w")) {
+                            String[] words = str.split(" ");
+                            StringBuilder stringBuilder = new StringBuilder();
+                            for (int i = 2; i < words.length; i++) {
+                                stringBuilder.append(words[i] + " ");
+                            }
+                            str = String.valueOf(stringBuilder);
+                            server.personalMsg(str, getNick(), words[1]);
+                        } else {
+                            server.broadcastMsg(str);
+                        }
+
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
